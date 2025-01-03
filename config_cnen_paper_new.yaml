@@ -1,0 +1,143 @@
+quality: [90, 100]
+landscape: 0
+short_size: [1240, 1754]
+aspect_ratio: [1, 1.414]
+
+background:
+  image:
+    paths: [/mnt/petrelfs/zhujiawei/Projects/donut-master/synthdog/resources/background/whitebackground.jpg]
+    #paths: [resources/background]
+    weights: [1]
+
+  effect:
+    args:
+      # gaussian blur
+      # - prob: 1
+      #   args:
+      #     sigma: [0, 10]
+
+document:
+  fullscreen: 1
+  landscape: 0
+  short_size: [1240, 1754]
+  aspect_ratio: [1, 1.414]
+
+  paper:
+    image:
+      paths: [/mnt/petrelfs/zhujiawei/Projects/donut-master/synthdog/resources/background/whitebackground.jpg]
+      weights: [1]
+      alpha: [0, 0.2]
+      grayscale: 0
+      crop: 1
+
+  content:
+    margin: [0, 0.1]
+    text:
+      path: /mnt/petrelfs/zhujiawei/Projects/donut-master/synthdog/list_cn_en/part_cn_en_500.txt
+    font:
+      paths: [resources/font/cn_en]
+      weights: [1]
+      bold: 0
+    layout:
+      #text_scale: [0.0334, 0.1]
+      text_scale: [0.0134, 0.04]
+      max_row: 100
+      max_col: 2
+      # fill: [0.5, 1]
+      fill: [0.7, 1]
+      full: 0.5
+      #align: [left, right, center]
+      align: [left]
+      stack_spacing: [0.0334, 0.0334]
+      stack_fill: [0.7, 1]
+      stack_full: 0.6
+    textbox:
+      fill: [0.8, 1]
+    textbox_color:
+      prob: 0.2
+      args:
+        gray: [0, 64]
+        colorize: 1
+    content_color:
+      prob: 0.2
+      args:
+        gray: [0, 64]
+        colorize: 1
+  text_count:
+    min: 30  # 最少生成的文字数量
+    max: 200 # 最多生成的文字数量
+
+  effect:
+    args:
+      # elastic distortion
+      - prob: 0.1
+        args:
+          alpha: [0, 1]
+          sigma: [0, 0.5]
+      # gaussian noise
+      - prob: 0.1
+        args:
+          scale: [0, 8]
+          per_channel: 0
+      # perspective
+      - prob: 0.1
+        args:
+          weights: [750, 50, 50, 25, 25, 25, 25, 50]
+          args:
+            - percents: [[0.75, 1], [0.75, 1], [0.75, 1], [0.75, 1]]
+            - percents: [[0.75, 1], [1, 1], [0.75, 1], [1, 1]]
+            - percents: [[1, 1], [0.75, 1], [1, 1], [0.75, 1]]
+            - percents: [[0.75, 1], [1, 1], [1, 1], [1, 1]]
+            - percents: [[1, 1], [0.75, 1], [1, 1], [1, 1]]
+            - percents: [[1, 1], [1, 1], [0.75, 1], [1, 1]]
+            - percents: [[1, 1], [1, 1], [1, 1], [0.75, 1]]
+            - percents: [[1, 1], [1, 1], [1, 1], [1, 1]]
+
+text_effect:
+  args:
+    # rotate
+    - prob: 0.1
+      args:
+        angle: [-1, 1]
+    # elastic distortion
+    - prob: 0.1
+      args:
+        alpha: [0, 0.5]
+        sigma: [0, 0.3]
+    # gaussian blur
+    - prob: 0.1
+      args:
+        sigma: [0, 0.5]
+
+
+effect:
+  args:
+    # color
+    - prob: 0.1
+      args:
+        rgb: [[0, 255], [0, 255], [0, 255]]
+        alpha: [0, 0.2]
+    # shadow
+    - prob: 0.1
+      args:
+        intensity: [0, 160]
+        amount: [0, 1]
+        smoothing: [0.5, 1]
+        bidirectional: 0
+    # contrast
+    - prob: 0.1
+      args:
+        alpha: [1, 1.5]
+    # brightness
+    - prob: 0.1
+      args:
+        beta: [-48, 0]
+    # motion blur
+    - prob: 0.1
+      args:
+        k: [3, 5]
+        angle: [0, 360]
+    # # gaussian blur
+    # - prob: 1
+    #   args:
+    #     sigma: [0, 1.5]

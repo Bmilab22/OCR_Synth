@@ -1,0 +1,152 @@
+quality: [95, 95]
+landscape: 0.5
+short_size: [720, 1024]
+aspect_ratio: [1, 2]
+
+background:
+  image:
+    paths: [resources/coco/train2017]
+    #paths: [resources/background]
+    weights: [1]
+
+  effect:
+    args:
+      # gaussian blur
+      - prob: 0.5
+        args:
+          sigma: [0, 10]
+
+document:
+  fullscreen: 0.5
+  landscape: 0.5
+  short_size: [240, 720]
+  aspect_ratio: [1, 2]
+
+  paper:
+    image:
+      paths: [resources/paper]
+      weights: [1]
+      alpha: [0, 0.1]
+      grayscale: 1
+      crop: 1
+
+  content:
+    margin: [0, 0.1]
+    text:
+      path: resources/corpus/zhwiki.txt
+    font:
+      paths: [resources/font/zh]
+      weights: [1]
+      bold: 0
+    layout:
+      text_scale: [0.0334, 0.1]
+      max_row: 10
+      max_col: 3
+      fill: [0.5, 1]
+      full: 0.6
+      align: [left, right, center]
+      stack_spacing: [0.0334, 0.0334]
+      stack_fill: [0.7, 1]
+      stack_full: 0.1
+    textbox:
+      fill: [0.7, 1]
+    textbox_color:
+      prob: 0.2
+      args:
+        gray: [0, 64]
+        colorize: 1
+    content_color:
+      prob: 0.2
+      args:
+        gray: [0, 64]
+        colorize: 1
+  text_count:
+    min: 40 # 最少生成的文字数量
+    max: 100 # 最多生成的文字数量
+
+  effect:
+    args:
+      # elastic distortion
+      - prob: 0.5
+        args:
+          alpha: [0, 1]
+          sigma: [0, 0.5]
+      # gaussian noise
+      - prob:  0.3
+        args:
+          scale: [0, 8]
+          per_channel: 0
+      # perspective
+      - prob:  0.4
+        args:
+          weights: [750, 50, 50, 25, 25, 25, 25, 50]
+          args:
+            - percents: [[0.75, 1], [0.75, 1], [0.75, 1], [0.75, 1]]
+            - percents: [[0.75, 1], [1, 1], [0.75, 1], [1, 1]]
+            - percents: [[1, 1], [0.75, 1], [1, 1], [0.75, 1]]
+            - percents: [[0.75, 1], [1, 1], [1, 1], [1, 1]]
+            - percents: [[1, 1], [0.75, 1], [1, 1], [1, 1]]
+            - percents: [[1, 1], [1, 1], [0.75, 1], [1, 1]]
+            - percents: [[1, 1], [1, 1], [1, 1], [0.75, 1]]
+            - percents: [[1, 1], [1, 1], [1, 1], [1, 1]]
+
+text_effect:
+  args:
+    # rotate
+    - prob:  0.3
+      args:
+        angle: [-3, 3]
+    # elastic distortion
+    - prob:  0.5
+      args:
+        alpha: [0, 0.8]
+        sigma: [0, 0.3]
+    # gaussian blur
+    - prob:  0.5
+      args:
+        sigma: [0, 1.0]
+
+
+shape:
+  prob: 0.6
+  args:
+    weights: [1, 1]
+    args:
+      # elastic distortion
+      - alpha: [15, 30]
+        sigma: [4, 12]
+      # elastic distortion
+      - alpha: [0, 2]
+        sigma: [0, 0.6]
+
+effect:
+  args:
+    # color
+    - prob: 0.3
+      args:
+        rgb: [[0, 255], [0, 255], [0, 255]]
+        alpha: [0, 0.2]
+    # shadow
+    - prob: 0.2
+      args:
+        intensity: [0, 160]
+        amount: [0, 1]
+        smoothing: [0.5, 1]
+        bidirectional: 0
+    # contrast
+    - prob: 0.2
+      args:
+        alpha: [1, 1.5]
+    # brightness
+    - prob: 0.2
+      args:
+        beta: [-48, 0]
+    # motion blur
+    - prob: 0.2
+      args:
+        k: [3, 5]
+        angle: [0, 360]
+    # gaussian blur
+    - prob: 0.2
+      args:
+        sigma: [0, 1.5]
